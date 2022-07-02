@@ -289,6 +289,8 @@ class Character extends FlxSprite
 
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
 
+				animation.addByPrefix('dodge','boyfriend dodge', 24, false);
+
 				addOffset('idle', -5);
 				addOffset("singUP", -29, 27);
 				addOffset("singRIGHT", -38, -7);
