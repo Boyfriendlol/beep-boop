@@ -220,13 +220,13 @@ class ModchartState
                 @:privateAccess
 				return PlayState.dad;
 			case 'pincer1': //Termination shit
-				return PlayState.pincer1;
+				return PlayState.instance.pincer1;
 			case 'pincer2': 
-				return PlayState.pincer2;
+				return PlayState.instance.pincer2;
 			case 'pincer3': 
-				return PlayState.pincer3;
+				return PlayState.instance.pincer3;
 			case 'pincer4':
-				return PlayState.pincer4;
+				return PlayState.instance.pincer4;
 		}
 		// lua objects or what ever
 		if (luaSprites.get(id) == null)
