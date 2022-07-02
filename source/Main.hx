@@ -30,6 +30,8 @@ class Main extends Sprite
 	
 	public static var path:String = System.applicationStorageDirectory;
 
+	public static var qtOptimisation = false;
+
 	public static function main():Void
 	{
 
