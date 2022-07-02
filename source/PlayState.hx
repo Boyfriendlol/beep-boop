@@ -1800,7 +1800,6 @@ class PlayState extends MusicBeatState
 
 	var luaWiggles:Array<WiggleEffect> = [];
 
-  }
 	public static var luaModchart:ModchartState = null;
 
 	function startCountdown():Void
@@ -2537,7 +2536,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		}
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			#if windows
@@ -4967,7 +4965,7 @@ class PlayState extends MusicBeatState
 
 			// Dad doesnt interupt his own notes
 			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && !qtCarelessFin){
-				if(SONG.song.toLowerCase() == "cessation"){
+				/*if(SONG.song.toLowerCase() == "cessation"){
 					if((curStep >= 640 && curStep <= 794) || (curStep >= 1040 && curStep <= 1199))
 					{
 						dad.dance(true);
@@ -4979,7 +4977,7 @@ class PlayState extends MusicBeatState
 					dad.dance();
 			}
 
-		}
+		}*/
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
