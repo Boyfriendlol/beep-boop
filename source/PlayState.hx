@@ -2363,7 +2363,7 @@ class PlayState extends MusicBeatState
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
 	
-	function HazStart(){
+	/*function HazStart(){
 		//Don't spoil the fun for others.
 		if(!Main.qtOptimisation){
 			if(FlxG.random.bool(5)){
@@ -2400,7 +2400,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-	}
+	}*/
 
 	public static var songRate = 1.5;
 
