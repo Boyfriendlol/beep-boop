@@ -456,6 +456,12 @@ class ModchartState
 				trace(Lua_helper.add_callback(lua,"kbAttackAlertDouble", function(pointless:Bool = false) {
 					PlayState.instance.KBATTACK_ALERTDOUBLE(pointless);
 				}));
+				trace(Lua_helper.add_callback(lua,"kbAttackAlertTriple", function(pointless:Bool = false) {
+					PlayState.instance.KBATTACK_ALERTTRIPLE(pointless);
+				}));
+				trace(Lua_helper.add_callback(lua,"kbAttackAlertCuadruple", function(pointless:Bool = false) {
+					PlayState.instance.KBATTACK_ALERTCUADRUPLE(pointless);
+				}));
 				trace(Lua_helper.add_callback(lua,"kbAttack", function(prepare:Bool = false, sound:String = 'attack') {
 					PlayState.instance.KBATTACK(prepare, sound);
 				}));
