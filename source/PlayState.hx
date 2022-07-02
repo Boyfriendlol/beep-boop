@@ -1058,9 +1058,11 @@ class PlayState extends MusicBeatState
 
 				//Alert!
 				kb_attack_alert = new FlxSprite();
-				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW');
+				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW_with_EXTRAS');
 				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
-				kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);	
+				kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);
+				kb_attack_alert.animation.addByPrefix('alertTRIPLE', 'kb_attack_animation_alert-triple', 24, false);	
+				kb_attack_alert.animation.addByPrefix('alertCUADRUPLE', 'kb_attack_animation_alert-cuadruple-LMAO', 24, false);
 				kb_attack_alert.antialiasing = true;
 				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
 				kb_attack_alert.cameras = [camHUD];
@@ -3017,11 +3019,11 @@ class PlayState extends MusicBeatState
 							switch(FlxG.random.int(1, 3))
 							{
 								case 2:
-									FlxG.sound.play(Paths.sound('glitch-error02'));
+									FlxG.sound.play(Paths.sound('glitch-error02', 'qt'));
 								case 3:
-									FlxG.sound.play(Paths.sound('glitch-error03'));
+									FlxG.sound.play(Paths.sound('glitch-error03', 'qt'));
 								default:
-									FlxG.sound.play(Paths.sound('glitch-error01'));
+									FlxG.sound.play(Paths.sound('glitch-error01', 'qt'));
 							}
 
 							//18.5% chance of an eye appearing on TV when glitching
@@ -3294,6 +3296,27 @@ class PlayState extends MusicBeatState
 		kb_attack_alert.animation.play('alertDOUBLE');
 		FlxG.sound.play(Paths.sound('old/alertALT','qt'), 1);
 	}
+	
+	//ATTACK TRIPLE VARIATION LOL
+	public function KBATTACK_ALERTTRIPLE(pointless:Bool = false):Void
+		{
+			if(!(SONG.song.toLowerCase() == "tutorial")){
+				trace("Sawblade AlertTRIPLE Error, cannot use the AlertTriple function outside Tutorial.");
+			}
+			trace("DANGER TRIPLE INCOMING!!");
+			kb_attack_alert.animation.play('alertTRIPLE');
+			FlxG.sound.play(Paths.sound('old/alertALT2','qt'), 1);
+		}
+	//ATTACK CUADRUPLE!!! HOLY SHIT
+	public function KBATTACK_ALERTCUADRUPLE(pointless:Bool = false):Void
+		{
+			if(!(SONG.song.toLowerCase() == "tutorial")){
+				trace("Sawblade AlertCUADRUPLE Error, cannot use the AlertCuadruple function outside Tutorial.");
+			}
+			trace("DANGER CUADRUPLE INCOMING!!");
+			kb_attack_alert.animation.play('alertCUADRUPLE');
+			FlxG.sound.play(Paths.sound('old/alertALT3','qt'), 1);
+		}
 
 	//Pincer logic, used by the modchart but can be hardcoded like saws if you want.
 	public function KBPINCER_PREPARE(laneID:Int,goAway:Bool):Void
