@@ -2537,6 +2537,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		}
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			#if windows
