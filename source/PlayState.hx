@@ -1346,7 +1346,7 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
-			case 'streetFinal' | 'streetCute' | 'street' :
+			case 'streetFinal' | 'streetFinalalt' | 'streetCutealt' | 'streetCute' | 'streetalt' | 'street' :
 				boyfriend.x += 40;
 				boyfriend.y += 65;
 				if(SONG.song.toLowerCase() == 'censory-overload' || SONG.song.toLowerCase() == 'termination'){
@@ -2507,6 +2507,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		}
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			#if windows
