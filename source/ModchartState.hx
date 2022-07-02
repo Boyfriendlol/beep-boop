@@ -439,31 +439,31 @@ class ModchartState
 
 				//Termination shit -Haz
 				trace(Lua_helper.add_callback(lua,"kbAlertTOGGLE", function(toAdd:Bool) {
-					PlayState.KBALERT_TOGGLE(toAdd);
+					PlayState.instance.KBALERT_TOGGLE(toAdd);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttackTOGGLE", function(toAdd:Bool) {
-					PlayState.KBATTACK_TOGGLE(toAdd);
+					PlayState.instance.KBATTACK_TOGGLE(toAdd);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbPincerPrepare", function(laneID:Int, goAway:Bool) {
-					PlayState.KBPINCER_PREPARE(laneID,goAway);
+					PlayState.instance.KBPINCER_PREPARE(laneID,goAway);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbPincerGrab", function(laneID:Int) {
-					PlayState.KBPINCER_GRAB(laneID);
+					PlayState.instance.KBPINCER_GRAB(laneID);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttackAlert", function(pointless:Bool = false) {
-					PlayState.KBATTACK_ALERT(pointless);
+					PlayState.instance.KBATTACK_ALERT(pointless);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttackAlertDouble", function(pointless:Bool = false) {
-					PlayState.KBATTACK_ALERTDOUBLE(pointless);
+					PlayState.instance.KBATTACK_ALERTDOUBLE(pointless);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttack", function(prepare:Bool = false, sound:String = 'attack') {
-					PlayState.KBATTACK(prepare, sound);
+					PlayState.instance.KBATTACK(prepare, sound);
 				}));
 				trace(Lua_helper.add_callback(lua,"dodgeTimingOverride", function(newValue:Float = 0.22625) {
-					PlayState.hxdodgeTimingOverride(newValue);
+					PlayState.instance.dodgeTimingOverride(newValue);
 				}));
 				trace(Lua_helper.add_callback(lua,"dodgeCooldownOverride", function(newValue:Float = 0.1135) {
-					PlayState.dodgeCooldownOverride(newValue);
+					PlayState.instance.dodgeCooldownOverride(newValue);
 				}));
 				
 	
