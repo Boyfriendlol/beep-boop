@@ -400,496 +400,6 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('terminate/terminateDialogue'));
 		}
 
-		switch(SONG.song.toLowerCase())
-		{
-			case 'carefree': 
-			{
-				defaultCamZoom = 0.92125;
-				//defaultCamZoom = 0.8125;
-				curStage = 'streetCute';
-				//Postitive = Right, Down
-				//Negative = Left, Up
-				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackCute'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-
-				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontCute'));
-				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
-				streetFront.updateHitbox();
-				streetFront.antialiasing = true;
-				streetFront.scrollFactor.set(0.9, 0.9);
-				streetFront.active = false;
-				add(streetFront);
-
-				qt_tv01 = new FlxSprite(-62, 540).loadGraphic(Paths.image('stage/TV_V2_off'));
-				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
-				qt_tv01.updateHitbox();
-				qt_tv01.antialiasing = true;
-				qt_tv01.scrollFactor.set(0.89, 0.89);
-				qt_tv01.active = false;
-				add(qt_tv01);
-			}
-			case 'cessation': 
-			{
-				defaultCamZoom = 0.8125;
-				curStage = 'streetCute';
-				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackCute'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-
-				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontCute'));
-				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
-				streetFront.updateHitbox();
-				streetFront.antialiasing = true;
-				streetFront.scrollFactor.set(0.9, 0.9);
-				streetFront.active = false;
-				add(streetFront);
-
-				qt_tv01 = new FlxSprite();
-				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V4');
-				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);	
-				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 28, false);		
-				qt_tv01.animation.addByPrefix('sus', 'TV_sus', 24, true);
-				qt_tv01.animation.addByPrefix('heart', 'TV_End', 24, false);
-				qt_tv01.setPosition(-62, 540);
-				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
-				qt_tv01.updateHitbox();
-				qt_tv01.antialiasing = true;
-				qt_tv01.scrollFactor.set(0.89, 0.89);
-				add(qt_tv01);
-				qt_tv01.animation.play('heart');
-
-				//Alert!
-				kb_attack_alert = new FlxSprite();
-				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW');
-				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
-				kb_attack_alert.antialiasing = true;
-				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
-				kb_attack_alert.cameras = [camHUD];
-				kb_attack_alert.x = FlxG.width - 700;
-				kb_attack_alert.y = 205;
-
-				cessationTroll = new FlxSprite(-62, 540).loadGraphic(Paths.image('bonus/justkidding'));
-				cessationTroll.setGraphicSize(Std.int(cessationTroll.width * 0.9));
-				cessationTroll.cameras = [camHUD];
-				cessationTroll.x = FlxG.width - 950;
-				cessationTroll.y = 205;
-			}
-			case 'careless': 
-			{
-				defaultCamZoom = 0.925;
-				curStage = 'street';
-				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-
-				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
-				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
-				streetFront.updateHitbox();
-				streetFront.antialiasing = true;
-				streetFront.scrollFactor.set(0.9, 0.9);
-				streetFront.active = false;
-				add(streetFront);
-
-				qt_tv01 = new FlxSprite();
-				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
-				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
-				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 26, false);
-				//qt_tv01.animation.addByPrefix('eye', 'TV_eyes', 24, true);	
-				qt_tv01.animation.addByPrefix('eye', 'TV_brutality', 24, true); //Replaced the hex eye with the brutality symbols for more accurate lore.
-				qt_tv01.animation.addByPrefix('eyeLeft', 'TV_eyeLeft', 24, false);
-				qt_tv01.animation.addByPrefix('eyeRight', 'TV_eyeRight', 24, false);
-
-				qt_tv01.setPosition(-62, 540);
-				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
-				qt_tv01.updateHitbox();
-				qt_tv01.antialiasing = true;
-				qt_tv01.scrollFactor.set(0.89, 0.89);
-				add(qt_tv01);
-				qt_tv01.animation.play('idle');
-			}
-			case 'censory-overload': 
-			{
-				defaultCamZoom = 0.8125;
-				
-				curStage = 'streetFinal';
-
-				if(!Main.qtOptimisation){
-					//Far Back Layer - Error (blue screen)
-					var errorBG:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetError'));
-					errorBG.antialiasing = true;
-					errorBG.scrollFactor.set(0.9, 0.9);
-					errorBG.active = false;
-					add(errorBG);
-
-					//Back Layer - Error (glitched version of normal Back)
-					streetBGerror = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackError'));
-					streetBGerror.antialiasing = true;
-					streetBGerror.scrollFactor.set(0.9, 0.9);
-					add(streetBGerror);
-				}
-
-				//Back Layer - Normal
-				streetBG = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
-				streetBG.antialiasing = true;
-				streetBG.scrollFactor.set(0.9, 0.9);
-				add(streetBG);
-
-
-				//Front Layer - Normal
-				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
-				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
-				streetFront.updateHitbox();
-				streetFront.antialiasing = true;
-				streetFront.scrollFactor.set(0.9, 0.9);
-				streetFront.active = false;
-				add(streetFront);
-
-				if(!Main.qtOptimisation){
-					//Front Layer - Error (changes to have a glow)
-					streetFrontError = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontError'));
-					streetFrontError.setGraphicSize(Std.int(streetFrontError.width * 1.15));
-					streetFrontError.updateHitbox();
-					streetFrontError.antialiasing = true;
-					streetFrontError.scrollFactor.set(0.9, 0.9);
-					streetFrontError.active = false;
-					add(streetFrontError);
-					streetFrontError.visible = false;
-				}
-
-
-				qt_tv01 = new FlxSprite();
-				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
-				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
-				qt_tv01.animation.addByPrefix('eye', 'TV_brutality', 24, true); //Replaced the hex eye with the brutality symbols for more accurate lore.
-				qt_tv01.animation.addByPrefix('error', 'TV_Error', 24, true);	
-				qt_tv01.animation.addByPrefix('404', 'TV_Bluescreen', 24, true);		
-				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 32, false);		
-				qt_tv01.animation.addByPrefix('watch', 'TV_Watchout', 24, true);
-				qt_tv01.animation.addByPrefix('drop', 'TV_Drop', 24, true);
-				qt_tv01.animation.addByPrefix('sus', 'TV_sus', 24, true);
-				qt_tv01.setPosition(-62, 540);
-				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
-				qt_tv01.updateHitbox();
-				qt_tv01.antialiasing = true;
-				qt_tv01.scrollFactor.set(0.89, 0.89);
-				add(qt_tv01);
-				qt_tv01.animation.play('idle');
-
-				//https://youtu.be/Nz0qjc8WRyY?t=1749
-				//Wow, I guess it's that easy huh? -Haz
-				if(!Main.qtOptimisation){
-					boyfriend404 = new Boyfriend(770, 450, 'bf_404');
-					dad404 = new Character(100,100,'robot_404');
-					gf404 = new Character(400,130,'gf_404');
-					gf404.scrollFactor.set(0.95, 0.95);
-
-					//These are set to 0 on first step. Not 0 here because otherwise they aren't cached in properly or something?
-					//I dunno
-					boyfriend404.alpha = 0.0125; 
-					dad404.alpha = 0.0125;
-					gf404.alpha = 0.0125;
-
-					//Probably a better way of doing this... too bad! -Haz
-					qt_gas01 = new FlxSprite();
-					//Old gas sprites.
-					//qt_gas01.frames = Paths.getSparrowAtlas('stage/gas_test');
-					//qt_gas01.animation.addByPrefix('burst', 'ezgif.com-gif-makernew_gif instance ', 30, false);	
-
-					//Left gas
-					qt_gas01.frames = Paths.getSparrowAtlas('stage/Gas_Release');
-					qt_gas01.animation.addByPrefix('burst', 'Gas_Release', 38, false);	
-					qt_gas01.animation.addByPrefix('burstALT', 'Gas_Release', 49, false);
-					qt_gas01.animation.addByPrefix('burstFAST', 'Gas_Release', 76, false);	
-					qt_gas01.setGraphicSize(Std.int(qt_gas01.width * 2.5));	
-					qt_gas01.antialiasing = true;
-					qt_gas01.scrollFactor.set();
-					qt_gas01.alpha = 0.72;
-					qt_gas01.setPosition(-880,-100);
-					qt_gas01.angle = -31;				
-
-					//Right gas
-					qt_gas02 = new FlxSprite();
-					//qt_gas02.frames = Paths.getSparrowAtlas('stage/gas_test');
-					//qt_gas02.animation.addByPrefix('burst', 'ezgif.com-gif-makernew_gif instance ', 30, false);
-
-					qt_gas02.frames = Paths.getSparrowAtlas('stage/Gas_Release');
-					qt_gas02.animation.addByPrefix('burst', 'Gas_Release', 38, false);	
-					qt_gas02.animation.addByPrefix('burstALT', 'Gas_Release', 49, false);
-					qt_gas02.animation.addByPrefix('burstFAST', 'Gas_Release', 76, false);	
-					qt_gas02.setGraphicSize(Std.int(qt_gas02.width * 2.5));
-					qt_gas02.antialiasing = true;
-					qt_gas02.scrollFactor.set();
-					qt_gas02.alpha = 0.72;
-					qt_gas02.setPosition(920,-100);
-					qt_gas02.angle = 31;
-				}
-			}
-			case 'terminate':
-			{
-				defaultCamZoom = 0.8125;
-				curStage = 'street';
-				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-
-				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
-				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
-				streetFront.updateHitbox();
-				streetFront.antialiasing = true;
-				streetFront.scrollFactor.set(0.9, 0.9);
-				streetFront.active = false;
-				add(streetFront);
-
-				qt_tv01 = new FlxSprite();
-				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
-				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
-				qt_tv01.animation.addByPrefix('error', 'TV_Error', 24, true);
-					
-				qt_tv01.setPosition(-62, 540);
-				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
-				qt_tv01.updateHitbox();
-				qt_tv01.antialiasing = true;
-				qt_tv01.scrollFactor.set(0.89, 0.89);
-				add(qt_tv01);
-				qt_tv01.animation.play('idle');
-			}
-			case 'tutorial': //Tutorial now has the attack functions from Termination so you can call them using modcharts so hopefully people who want to make their own song don't have to go to the source code to manually code in the attack stuff.
-			{
-				defaultCamZoom = 0.9;
-				curStage = 'stage';
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-
-				var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(0.9, 0.9);
-				stageFront.active = false;
-				add(stageFront);
-
-				//Saw that one coming!
-				kb_attack_saw = new FlxSprite();
-				kb_attack_saw.frames = Paths.getSparrowAtlas('bonus/attackv6');
-				kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);	
-				kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);	
-				kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
-				kb_attack_saw.antialiasing = true;
-				kb_attack_saw.setPosition(-860,615);
-
-				var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
-				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-				stageCurtains.updateHitbox();
-				stageCurtains.antialiasing = true;
-				stageCurtains.scrollFactor.set(1.3, 1.3);
-				stageCurtains.active = false;
-
-				add(stageCurtains);
-
-				//Pincer shit for moving notes around for a little bit of trollin'
-				pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
-				pincer1.antialiasing = true;
-				pincer1.scrollFactor.set();
-				
-				pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
-				pincer2.antialiasing = true;
-				pincer2.scrollFactor.set();
-				
-				pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
-				pincer3.antialiasing = true;
-				pincer3.scrollFactor.set();
-
-				pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
-				pincer4.antialiasing = true;
-				pincer4.scrollFactor.set();
-				if (FlxG.save.data.downscroll){
-					pincer4.angle = 270;
-					pincer3.angle = 270;
-					pincer2.angle = 270;
-					pincer1.angle = 270;
-					pincer1.offset.set(192,-75);
-					pincer2.offset.set(192,-75);
-					pincer3.offset.set(192,-75);
-					pincer4.offset.set(192,-75);
-				}else{
-					pincer4.angle = 90;
-					pincer3.angle = 90;
-					pincer2.angle = 90;
-					pincer1.angle = 90;
-					pincer1.offset.set(218,240);
-					pincer2.offset.set(218,240);
-					pincer3.offset.set(218,240);
-					pincer4.offset.set(218,240);
-				}
-
-				//Alert!
-				kb_attack_alert = new FlxSprite();
-				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW');
-				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
-				kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);	
-				kb_attack_alert.antialiasing = true;
-				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
-				kb_attack_alert.cameras = [camHUD];
-				kb_attack_alert.x = FlxG.width - 700;
-				kb_attack_alert.y = 205;
-			}
-			case 'termination': //Seperated the two so terminate can load quicker (doesn't need to load in the attack animations and stuff)
-			{
-				defaultCamZoom = 0.8125;
-				
-				curStage = 'streetFinal';
-
-				if(!Main.qtOptimisation){
-					//Far Back Layer - Error (blue screen)
-					var errorBG:FlxSprite = new FlxSprite(-600, -150).loadGraphic(Paths.image('stage/streetError'));
-					errorBG.antialiasing = true;
-					errorBG.scrollFactor.set(0.9, 0.9);
-					errorBG.active = false;
-					add(errorBG);
-
-					//Back Layer - Error (glitched version of normal Back)
-					streetBGerror = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackError'));
-					streetBGerror.antialiasing = true;
-					streetBGerror.scrollFactor.set(0.9, 0.9);
-					add(streetBGerror);
-				}
-
-				//Back Layer - Normal
-				streetBG = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
-				streetBG.antialiasing = true;
-				streetBG.scrollFactor.set(0.9, 0.9);
-				add(streetBG);
-
-
-				//Front Layer - Normal
-				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
-				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
-				streetFront.updateHitbox();
-				streetFront.antialiasing = true;
-				streetFront.scrollFactor.set(0.9, 0.9);
-				streetFront.active = false;
-				add(streetFront);
-
-				if(!Main.qtOptimisation){
-					//Front Layer - Error (changes to have a glow)
-					streetFrontError = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontError'));
-					streetFrontError.setGraphicSize(Std.int(streetFrontError.width * 1.15));
-					streetFrontError.updateHitbox();
-					streetFrontError.antialiasing = true;
-					streetFrontError.scrollFactor.set(0.9, 0.9);
-					streetFrontError.active = false;
-					add(streetFrontError);
-					streetFrontError.visible = false;
-				}
-
-				qt_tv01 = new FlxSprite();
-				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
-				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
-				qt_tv01.animation.addByPrefix('eye', 'TV_brutality', 24, true); //Replaced the hex eye with the brutality symbols for more accurate lore.
-				qt_tv01.animation.addByPrefix('eyeRight', 'TV_eyeRight', 24, true);
-				qt_tv01.animation.addByPrefix('eyeLeft', 'TV_eyeLeft', 24, true);
-				qt_tv01.animation.addByPrefix('error', 'TV_Error', 24, true);	
-				qt_tv01.animation.addByPrefix('404', 'TV_Bluescreen', 24, true);		
-				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 36, false);		
-				qt_tv01.animation.addByPrefix('watch', 'TV_Watchout', 24, true);
-				qt_tv01.animation.addByPrefix('drop', 'TV_Drop', 24, true);
-				qt_tv01.animation.addByPrefix('sus', 'TV_sus', 24, true);
-				qt_tv01.animation.addByPrefix('instructions', 'TV_Instructions-Normal', 24, true);
-				qt_tv01.animation.addByPrefix('gl', 'TV_GoodLuck', 24, true);
-				qt_tv01.setPosition(-62, 540);
-				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
-				qt_tv01.updateHitbox();
-				qt_tv01.antialiasing = true;
-				qt_tv01.scrollFactor.set(0.89, 0.89);
-				add(qt_tv01);
-				qt_tv01.animation.play('idle');
-
-
-				//https://youtu.be/Nz0qjc8WRyY?t=1749
-				//Wow, I guess it's that easy huh? -Haz
-				if(!Main.qtOptimisation){
-					boyfriend404 = new Boyfriend(770, 450, 'bf_404');
-					dad404 = new Character(100,100,'robot_404-TERMINATION');
-					gf404 = new Character(400,130,'gf_404');
-					gf404.scrollFactor.set(0.95, 0.95);
-
-					//These are set to 0 on first step. Not 0 here because otherwise they aren't cached in properly or something?
-					//I dunno
-					boyfriend404.alpha = 0.0125; 
-					dad404.alpha = 0.0125;
-					gf404.alpha = 0.0125;
-				}
-
-				//Alert!
-				kb_attack_alert = new FlxSprite();
-				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW', 'qt');
-				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
-				kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);	
-				kb_attack_alert.antialiasing = true;
-				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
-				kb_attack_alert.cameras = [camHUD];
-				kb_attack_alert.x = FlxG.width - 700;
-				kb_attack_alert.y = 205;
-				//kb_attack_alert.animation.play("alert"); //Placeholder, change this to start already hidden or whatever.
-
-				//Saw that one coming!
-				kb_attack_saw = new FlxSprite();
-				kb_attack_saw.frames = Paths.getSparrowAtlas('bonus/attackv6', 'qt');
-				kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);	
-				kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);	
-				kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
-				kb_attack_saw.antialiasing = true;
-				kb_attack_saw.setPosition(-860,615);
-
-				//Pincer shit for moving notes around for a little bit of trollin'
-				pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
-				pincer1.antialiasing = true;
-				pincer1.scrollFactor.set();
-				
-				pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
-				pincer2.antialiasing = true;
-				pincer2.scrollFactor.set();
-				
-				pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
-				pincer3.antialiasing = true;
-				pincer3.scrollFactor.set();
-
-				pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
-				pincer4.antialiasing = true;
-				pincer4.scrollFactor.set();
-				
-				if (FlxG.save.data.downscroll){
-					pincer4.angle = 270;
-					pincer3.angle = 270;
-					pincer2.angle = 270;
-					pincer1.angle = 270;
-					pincer1.offset.set(192,-75);
-					pincer2.offset.set(192,-75);
-					pincer3.offset.set(192,-75);
-					pincer4.offset.set(192,-75);
-				}else{
-					pincer4.angle = 90;
-					pincer3.angle = 90;
-					pincer2.angle = 90;
-					pincer1.angle = 90;
-					pincer1.offset.set(218,240);
-					pincer2.offset.set(218,240);
-					pincer3.offset.set(218,240);
-					pincer4.offset.set(218,240);
-				}
-		}
 		switch(SONG.stage)
 		{
 			case 'halloween': 
@@ -1213,33 +723,493 @@ class PlayState extends MusicBeatState
 								add(waveSprite);
 								add(waveSpriteFG);
 						*/
+			case 'streetCute': 
+			{
+				defaultCamZoom = 0.92125;
+				//defaultCamZoom = 0.8125;
+				curStage = 'streetCute';
+				//Postitive = Right, Down
+				//Negative = Left, Up
+				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackCute'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontCute'));
+				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
+				streetFront.updateHitbox();
+				streetFront.antialiasing = true;
+				streetFront.scrollFactor.set(0.9, 0.9);
+				streetFront.active = false;
+				add(streetFront);
+
+				qt_tv01 = new FlxSprite(-62, 540).loadGraphic(Paths.image('stage/TV_V2_off'));
+				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
+				qt_tv01.updateHitbox();
+				qt_tv01.antialiasing = true;
+				qt_tv01.scrollFactor.set(0.89, 0.89);
+				qt_tv01.active = false;
+				add(qt_tv01);
 			}
-			case 'stage':
-				{
-						defaultCamZoom = 0.9;
-						curStage = 'stage';
-						var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-						bg.antialiasing = true;
-						bg.scrollFactor.set(0.9, 0.9);
-						bg.active = false;
-						add(bg);
-	
-						var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
-						stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-						stageFront.updateHitbox();
-						stageFront.antialiasing = true;
-						stageFront.scrollFactor.set(0.9, 0.9);
-						stageFront.active = false;
-						add(stageFront);
-	
-						var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
-						stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-						stageCurtains.updateHitbox();
-						stageCurtains.antialiasing = true;
-						stageCurtains.scrollFactor.set(1.3, 1.3);
-						stageCurtains.active = false;
-	
-						add(stageCurtains);
+			case 'streetCutealt': 
+			{
+				defaultCamZoom = 0.8125;
+				curStage = 'streetCutealt';
+				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackCute'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontCute'));
+				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
+				streetFront.updateHitbox();
+				streetFront.antialiasing = true;
+				streetFront.scrollFactor.set(0.9, 0.9);
+				streetFront.active = false;
+				add(streetFront);
+
+				qt_tv01 = new FlxSprite();
+				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V4');
+				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);	
+				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 28, false);		
+				qt_tv01.animation.addByPrefix('sus', 'TV_sus', 24, true);
+				qt_tv01.animation.addByPrefix('heart', 'TV_End', 24, false);
+				qt_tv01.setPosition(-62, 540);
+				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
+				qt_tv01.updateHitbox();
+				qt_tv01.antialiasing = true;
+				qt_tv01.scrollFactor.set(0.89, 0.89);
+				add(qt_tv01);
+				qt_tv01.animation.play('heart');
+
+				//Alert!
+				kb_attack_alert = new FlxSprite();
+				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW');
+				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
+				kb_attack_alert.antialiasing = true;
+				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
+				kb_attack_alert.cameras = [camHUD];
+				kb_attack_alert.x = FlxG.width - 700;
+				kb_attack_alert.y = 205;
+
+				cessationTroll = new FlxSprite(-62, 540).loadGraphic(Paths.image('bonus/justkidding'));
+				cessationTroll.setGraphicSize(Std.int(cessationTroll.width * 0.9));
+				cessationTroll.cameras = [camHUD];
+				cessationTroll.x = FlxG.width - 950;
+				cessationTroll.y = 205;
+			}
+			case 'street': 
+			{
+				defaultCamZoom = 0.925;
+				curStage = 'street';
+				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
+				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
+				streetFront.updateHitbox();
+				streetFront.antialiasing = true;
+				streetFront.scrollFactor.set(0.9, 0.9);
+				streetFront.active = false;
+				add(streetFront);
+
+				qt_tv01 = new FlxSprite();
+				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
+				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
+				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 26, false);
+				//qt_tv01.animation.addByPrefix('eye', 'TV_eyes', 24, true);	
+				qt_tv01.animation.addByPrefix('eye', 'TV_brutality', 24, true); //Replaced the hex eye with the brutality symbols for more accurate lore.
+				qt_tv01.animation.addByPrefix('eyeLeft', 'TV_eyeLeft', 24, false);
+				qt_tv01.animation.addByPrefix('eyeRight', 'TV_eyeRight', 24, false);
+
+				qt_tv01.setPosition(-62, 540);
+				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
+				qt_tv01.updateHitbox();
+				qt_tv01.antialiasing = true;
+				qt_tv01.scrollFactor.set(0.89, 0.89);
+				add(qt_tv01);
+				qt_tv01.animation.play('idle');
+			}
+			case 'streetFinal': 
+			{
+				defaultCamZoom = 0.8125;
+				
+				curStage = 'streetFinal';
+
+				if(!Main.qtOptimisation){
+					//Far Back Layer - Error (blue screen)
+					var errorBG:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetError'));
+					errorBG.antialiasing = true;
+					errorBG.scrollFactor.set(0.9, 0.9);
+					errorBG.active = false;
+					add(errorBG);
+
+					//Back Layer - Error (glitched version of normal Back)
+					streetBGerror = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackError'));
+					streetBGerror.antialiasing = true;
+					streetBGerror.scrollFactor.set(0.9, 0.9);
+					add(streetBGerror);
+				}
+
+				//Back Layer - Normal
+				streetBG = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
+				streetBG.antialiasing = true;
+				streetBG.scrollFactor.set(0.9, 0.9);
+				add(streetBG);
+
+
+				//Front Layer - Normal
+				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
+				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
+				streetFront.updateHitbox();
+				streetFront.antialiasing = true;
+				streetFront.scrollFactor.set(0.9, 0.9);
+				streetFront.active = false;
+				add(streetFront);
+
+				if(!Main.qtOptimisation){
+					//Front Layer - Error (changes to have a glow)
+					streetFrontError = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontError'));
+					streetFrontError.setGraphicSize(Std.int(streetFrontError.width * 1.15));
+					streetFrontError.updateHitbox();
+					streetFrontError.antialiasing = true;
+					streetFrontError.scrollFactor.set(0.9, 0.9);
+					streetFrontError.active = false;
+					add(streetFrontError);
+					streetFrontError.visible = false;
+				}
+
+
+				qt_tv01 = new FlxSprite();
+				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
+				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
+				qt_tv01.animation.addByPrefix('eye', 'TV_brutality', 24, true); //Replaced the hex eye with the brutality symbols for more accurate lore.
+				qt_tv01.animation.addByPrefix('error', 'TV_Error', 24, true);	
+				qt_tv01.animation.addByPrefix('404', 'TV_Bluescreen', 24, true);		
+				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 32, false);		
+				qt_tv01.animation.addByPrefix('watch', 'TV_Watchout', 24, true);
+				qt_tv01.animation.addByPrefix('drop', 'TV_Drop', 24, true);
+				qt_tv01.animation.addByPrefix('sus', 'TV_sus', 24, true);
+				qt_tv01.setPosition(-62, 540);
+				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
+				qt_tv01.updateHitbox();
+				qt_tv01.antialiasing = true;
+				qt_tv01.scrollFactor.set(0.89, 0.89);
+				add(qt_tv01);
+				qt_tv01.animation.play('idle');
+
+				//https://youtu.be/Nz0qjc8WRyY?t=1749
+				//Wow, I guess it's that easy huh? -Haz
+				if(!Main.qtOptimisation){
+					boyfriend404 = new Boyfriend(770, 450, 'bf_404');
+					dad404 = new Character(100,100,'robot_404');
+					gf404 = new Character(400,130,'gf_404');
+					gf404.scrollFactor.set(0.95, 0.95);
+
+					//These are set to 0 on first step. Not 0 here because otherwise they aren't cached in properly or something?
+					//I dunno
+					boyfriend404.alpha = 0.0125; 
+					dad404.alpha = 0.0125;
+					gf404.alpha = 0.0125;
+
+					//Probably a better way of doing this... too bad! -Haz
+					qt_gas01 = new FlxSprite();
+					//Old gas sprites.
+					//qt_gas01.frames = Paths.getSparrowAtlas('stage/gas_test');
+					//qt_gas01.animation.addByPrefix('burst', 'ezgif.com-gif-makernew_gif instance ', 30, false);	
+
+					//Left gas
+					qt_gas01.frames = Paths.getSparrowAtlas('stage/Gas_Release');
+					qt_gas01.animation.addByPrefix('burst', 'Gas_Release', 38, false);	
+					qt_gas01.animation.addByPrefix('burstALT', 'Gas_Release', 49, false);
+					qt_gas01.animation.addByPrefix('burstFAST', 'Gas_Release', 76, false);	
+					qt_gas01.setGraphicSize(Std.int(qt_gas01.width * 2.5));	
+					qt_gas01.antialiasing = true;
+					qt_gas01.scrollFactor.set();
+					qt_gas01.alpha = 0.72;
+					qt_gas01.setPosition(-880,-100);
+					qt_gas01.angle = -31;				
+
+					//Right gas
+					qt_gas02 = new FlxSprite();
+					//qt_gas02.frames = Paths.getSparrowAtlas('stage/gas_test');
+					//qt_gas02.animation.addByPrefix('burst', 'ezgif.com-gif-makernew_gif instance ', 30, false);
+
+					qt_gas02.frames = Paths.getSparrowAtlas('stage/Gas_Release');
+					qt_gas02.animation.addByPrefix('burst', 'Gas_Release', 38, false);	
+					qt_gas02.animation.addByPrefix('burstALT', 'Gas_Release', 49, false);
+					qt_gas02.animation.addByPrefix('burstFAST', 'Gas_Release', 76, false);	
+					qt_gas02.setGraphicSize(Std.int(qt_gas02.width * 2.5));
+					qt_gas02.antialiasing = true;
+					qt_gas02.scrollFactor.set();
+					qt_gas02.alpha = 0.72;
+					qt_gas02.setPosition(920,-100);
+					qt_gas02.angle = 31;
+				}
+			}
+			case 'streetalt':
+			{
+				defaultCamZoom = 0.8125;
+				curStage = 'streetalt';
+				var bg:FlxSprite = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
+				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
+				streetFront.updateHitbox();
+				streetFront.antialiasing = true;
+				streetFront.scrollFactor.set(0.9, 0.9);
+				streetFront.active = false;
+				add(streetFront);
+
+				qt_tv01 = new FlxSprite();
+				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
+				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
+				qt_tv01.animation.addByPrefix('error', 'TV_Error', 24, true);
+					
+				qt_tv01.setPosition(-62, 540);
+				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
+				qt_tv01.updateHitbox();
+				qt_tv01.antialiasing = true;
+				qt_tv01.scrollFactor.set(0.89, 0.89);
+				add(qt_tv01);
+				qt_tv01.animation.play('idle');
+			}
+			case 'stage': //Tutorial now has the attack functions from Termination so you can call them using modcharts so hopefully people who want to make their own song don't have to go to the source code to manually code in the attack stuff.
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'stage';
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.scrollFactor.set(0.9, 0.9);
+				stageFront.active = false;
+				add(stageFront);
+
+				//Saw that one coming!
+				kb_attack_saw = new FlxSprite();
+				kb_attack_saw.frames = Paths.getSparrowAtlas('bonus/attackv6');
+				kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);	
+				kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);	
+				kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
+				kb_attack_saw.antialiasing = true;
+				kb_attack_saw.setPosition(-860,615);
+
+				var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+				stageCurtains.updateHitbox();
+				stageCurtains.antialiasing = true;
+				stageCurtains.scrollFactor.set(1.3, 1.3);
+				stageCurtains.active = false;
+
+				add(stageCurtains);
+
+				//Pincer shit for moving notes around for a little bit of trollin'
+				pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
+				pincer1.antialiasing = true;
+				pincer1.scrollFactor.set();
+				
+				pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
+				pincer2.antialiasing = true;
+				pincer2.scrollFactor.set();
+				
+				pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
+				pincer3.antialiasing = true;
+				pincer3.scrollFactor.set();
+
+				pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close'));
+				pincer4.antialiasing = true;
+				pincer4.scrollFactor.set();
+				if (FlxG.save.data.downscroll){
+					pincer4.angle = 270;
+					pincer3.angle = 270;
+					pincer2.angle = 270;
+					pincer1.angle = 270;
+					pincer1.offset.set(192,-75);
+					pincer2.offset.set(192,-75);
+					pincer3.offset.set(192,-75);
+					pincer4.offset.set(192,-75);
+				}else{
+					pincer4.angle = 90;
+					pincer3.angle = 90;
+					pincer2.angle = 90;
+					pincer1.angle = 90;
+					pincer1.offset.set(218,240);
+					pincer2.offset.set(218,240);
+					pincer3.offset.set(218,240);
+					pincer4.offset.set(218,240);
+				}
+
+				//Alert!
+				kb_attack_alert = new FlxSprite();
+				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW');
+				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
+				kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);	
+				kb_attack_alert.antialiasing = true;
+				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
+				kb_attack_alert.cameras = [camHUD];
+				kb_attack_alert.x = FlxG.width - 700;
+				kb_attack_alert.y = 205;
+			}
+			case 'streetFinalalt': //Seperated the two so terminate can load quicker (doesn't need to load in the attack animations and stuff)
+			{
+				defaultCamZoom = 0.8125;
+				
+				curStage = 'streetFinalalt';
+
+				if(!Main.qtOptimisation){
+					//Far Back Layer - Error (blue screen)
+					var errorBG:FlxSprite = new FlxSprite(-600, -150).loadGraphic(Paths.image('stage/streetError'));
+					errorBG.antialiasing = true;
+					errorBG.scrollFactor.set(0.9, 0.9);
+					errorBG.active = false;
+					add(errorBG);
+
+					//Back Layer - Error (glitched version of normal Back)
+					streetBGerror = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBackError'));
+					streetBGerror.antialiasing = true;
+					streetBGerror.scrollFactor.set(0.9, 0.9);
+					add(streetBGerror);
+				}
+
+				//Back Layer - Normal
+				streetBG = new FlxSprite(-750, -145).loadGraphic(Paths.image('stage/streetBack'));
+				streetBG.antialiasing = true;
+				streetBG.scrollFactor.set(0.9, 0.9);
+				add(streetBG);
+
+
+				//Front Layer - Normal
+				var streetFront:FlxSprite = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFront'));
+				streetFront.setGraphicSize(Std.int(streetFront.width * 1.15));
+				streetFront.updateHitbox();
+				streetFront.antialiasing = true;
+				streetFront.scrollFactor.set(0.9, 0.9);
+				streetFront.active = false;
+				add(streetFront);
+
+				if(!Main.qtOptimisation){
+					//Front Layer - Error (changes to have a glow)
+					streetFrontError = new FlxSprite(-820, 710).loadGraphic(Paths.image('stage/streetFrontError'));
+					streetFrontError.setGraphicSize(Std.int(streetFrontError.width * 1.15));
+					streetFrontError.updateHitbox();
+					streetFrontError.antialiasing = true;
+					streetFrontError.scrollFactor.set(0.9, 0.9);
+					streetFrontError.active = false;
+					add(streetFrontError);
+					streetFrontError.visible = false;
+				}
+
+				qt_tv01 = new FlxSprite();
+				qt_tv01.frames = Paths.getSparrowAtlas('stage/TV_V5');
+				qt_tv01.animation.addByPrefix('idle', 'TV_Idle', 24, true);
+				qt_tv01.animation.addByPrefix('eye', 'TV_brutality', 24, true); //Replaced the hex eye with the brutality symbols for more accurate lore.
+				qt_tv01.animation.addByPrefix('eyeRight', 'TV_eyeRight', 24, true);
+				qt_tv01.animation.addByPrefix('eyeLeft', 'TV_eyeLeft', 24, true);
+				qt_tv01.animation.addByPrefix('error', 'TV_Error', 24, true);	
+				qt_tv01.animation.addByPrefix('404', 'TV_Bluescreen', 24, true);		
+				qt_tv01.animation.addByPrefix('alert', 'TV_Attention', 36, false);		
+				qt_tv01.animation.addByPrefix('watch', 'TV_Watchout', 24, true);
+				qt_tv01.animation.addByPrefix('drop', 'TV_Drop', 24, true);
+				qt_tv01.animation.addByPrefix('sus', 'TV_sus', 24, true);
+				qt_tv01.animation.addByPrefix('instructions', 'TV_Instructions-Normal', 24, true);
+				qt_tv01.animation.addByPrefix('gl', 'TV_GoodLuck', 24, true);
+				qt_tv01.setPosition(-62, 540);
+				qt_tv01.setGraphicSize(Std.int(qt_tv01.width * 1.2));
+				qt_tv01.updateHitbox();
+				qt_tv01.antialiasing = true;
+				qt_tv01.scrollFactor.set(0.89, 0.89);
+				add(qt_tv01);
+				qt_tv01.animation.play('idle');
+
+
+				//https://youtu.be/Nz0qjc8WRyY?t=1749
+				//Wow, I guess it's that easy huh? -Haz
+				if(!Main.qtOptimisation){
+					boyfriend404 = new Boyfriend(770, 450, 'bf_404');
+					dad404 = new Character(100,100,'robot_404-TERMINATION');
+					gf404 = new Character(400,130,'gf_404');
+					gf404.scrollFactor.set(0.95, 0.95);
+
+					//These are set to 0 on first step. Not 0 here because otherwise they aren't cached in properly or something?
+					//I dunno
+					boyfriend404.alpha = 0.0125; 
+					dad404.alpha = 0.0125;
+					gf404.alpha = 0.0125;
+				}
+
+				//Alert!
+				kb_attack_alert = new FlxSprite();
+				kb_attack_alert.frames = Paths.getSparrowAtlas('bonus/attack_alert_NEW', 'qt');
+				kb_attack_alert.animation.addByPrefix('alert', 'kb_attack_animation_alert-single', 24, false);	
+				kb_attack_alert.animation.addByPrefix('alertDOUBLE', 'kb_attack_animation_alert-double', 24, false);	
+				kb_attack_alert.antialiasing = true;
+				kb_attack_alert.setGraphicSize(Std.int(kb_attack_alert.width * 1.5));
+				kb_attack_alert.cameras = [camHUD];
+				kb_attack_alert.x = FlxG.width - 700;
+				kb_attack_alert.y = 205;
+				//kb_attack_alert.animation.play("alert"); //Placeholder, change this to start already hidden or whatever.
+
+				//Saw that one coming!
+				kb_attack_saw = new FlxSprite();
+				kb_attack_saw.frames = Paths.getSparrowAtlas('bonus/attackv6', 'qt');
+				kb_attack_saw.animation.addByPrefix('fire', 'kb_attack_animation_fire', 24, false);	
+				kb_attack_saw.animation.addByPrefix('prepare', 'kb_attack_animation_prepare', 24, false);	
+				kb_attack_saw.setGraphicSize(Std.int(kb_attack_saw.width * 1.15));
+				kb_attack_saw.antialiasing = true;
+				kb_attack_saw.setPosition(-860,615);
+
+				//Pincer shit for moving notes around for a little bit of trollin'
+				pincer1 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
+				pincer1.antialiasing = true;
+				pincer1.scrollFactor.set();
+				
+				pincer2 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
+				pincer2.antialiasing = true;
+				pincer2.scrollFactor.set();
+				
+				pincer3 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
+				pincer3.antialiasing = true;
+				pincer3.scrollFactor.set();
+
+				pincer4 = new FlxSprite(0, 0).loadGraphic(Paths.image('bonus/pincer-close', 'qt'));
+				pincer4.antialiasing = true;
+				pincer4.scrollFactor.set();
+				
+				if (FlxG.save.data.downscroll){
+					pincer4.angle = 270;
+					pincer3.angle = 270;
+					pincer2.angle = 270;
+					pincer1.angle = 270;
+					pincer1.offset.set(192,-75);
+					pincer2.offset.set(192,-75);
+					pincer3.offset.set(192,-75);
+					pincer4.offset.set(192,-75);
+				}else{
+					pincer4.angle = 90;
+					pincer3.angle = 90;
+					pincer2.angle = 90;
+					pincer1.angle = 90;
+					pincer1.offset.set(218,240);
+					pincer2.offset.set(218,240);
+					pincer3.offset.set(218,240);
+					pincer4.offset.set(218,240);
+				}
 				}
 			default:
 			{
@@ -1629,21 +1599,55 @@ class PlayState extends MusicBeatState
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
-		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
+		var black:FlxSprite = new FlxSprite(-300, -100).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
 		black.scrollFactor.set();
-		add(black);
 
+		FlxG.log.notice(qtCarelessFin);
+		if(!qtCarelessFin)
+		{
+			add(black);
+		}
+		else
+		{
+			FlxTween.tween(FlxG.camera, {x: 0, y:0}, 1.5, {
+				ease: FlxEase.quadInOut
+			});
+		}
+
+		trace(cutsceneSkip);
 		var red:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFff1b31);
 		red.scrollFactor.set();
 
 		var senpaiEvil:FlxSprite = new FlxSprite();
-		senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy');
-		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
-		senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
-		senpaiEvil.scrollFactor.set();
-		senpaiEvil.updateHitbox();
-		senpaiEvil.screenCenter();
+		var horrorStage:FlxSprite = new FlxSprite();
+		if(!cutsceneSkip){
+			if(SONG.song.toLowerCase() == 'censory-overload'){
+				camHUD.visible = false;
+				//BG
+				horrorStage.frames = Paths.getSparrowAtlas('stage/horrorbg');
+				horrorStage.animation.addByPrefix('idle', 'Symbol 10 instance ', 24, false);
+				horrorStage.antialiasing = true;
+				horrorStage.scrollFactor.set();
+				horrorStage.screenCenter();
 
+				//QT sprite
+				senpaiEvil.frames = Paths.getSparrowAtlas('cutscenev3');
+				senpaiEvil.animation.addByPrefix('idle', 'final_edited', 24, false);
+				senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 0.875));
+				senpaiEvil.scrollFactor.set();
+				senpaiEvil.updateHitbox();
+				senpaiEvil.screenCenter();
+				senpaiEvil.x -= 140;
+				senpaiEvil.y -= 55;
+			}else{
+				senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy');
+				senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
+				senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
+				senpaiEvil.scrollFactor.set();
+				senpaiEvil.updateHitbox();
+				senpaiEvil.screenCenter();
+			}
+		}
 		if (SONG.song.toLowerCase() == 'roses' || SONG.song.toLowerCase() == 'thorns')
 		{
 			remove(black);
@@ -1652,6 +1656,10 @@ class PlayState extends MusicBeatState
 			{
 				add(red);
 			}
+		}
+		else if (SONG.song.toLowerCase() == 'censory-overload' && !cutsceneSkip)
+		{
+			add(horrorStage);
 		}
 
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
@@ -1668,7 +1676,46 @@ class PlayState extends MusicBeatState
 				{
 					inCutscene = true;
 
-					if (SONG.song.toLowerCase() == 'thorns')
+					if (SONG.song.toLowerCase() == 'censory-overload' && !cutsceneSkip)
+					{
+						//Background old
+						//var horrorStage:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stage/horrorbg'));
+						//horrorStage.antialiasing = true;
+						//horrorStage.scrollFactor.set();
+						//horrorStage.y-=125;
+						//add(horrorStage);
+						add(senpaiEvil);
+						senpaiEvil.alpha = 0;
+						new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
+						{
+							senpaiEvil.alpha += 0.15;
+							if (senpaiEvil.alpha < 1)
+							{
+								swagTimer.reset();
+							}
+							else
+							{
+								senpaiEvil.animation.play('idle');
+								horrorStage.animation.play('idle');
+								FlxG.sound.play(Paths.sound('music-box-horror'), 0.9, false, null, true, function()
+								{
+									remove(senpaiEvil);
+									remove(red);
+									remove(horrorStage);
+									camHUD.visible = true;
+									FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
+									{
+										add(dialogueBox);
+									}, true);
+								});
+								new FlxTimer().start(13, function(deadTime:FlxTimer)
+								{
+									FlxG.camera.fade(FlxColor.WHITE, 3, false);
+								});
+							}
+						});
+					}
+					else if (SONG.song.toLowerCase() == 'thorns'  && !cutsceneSkip)
 					{
 						add(senpaiEvil);
 						senpaiEvil.alpha = 0;
@@ -1704,7 +1751,14 @@ class PlayState extends MusicBeatState
 					}
 				}
 				else
-					startCountdown();
+					if(!qtCarelessFin)
+					{
+						startCountdown();
+					}
+					else
+					{
+						loadSongHazard();
+					}
 
 				remove(black);
 			}
@@ -1745,9 +1799,15 @@ class PlayState extends MusicBeatState
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
+			if(!Main.qtOptimisation && (SONG.song.toLowerCase()=='censory-overload' || SONG.song.toLowerCase() == 'termination')){
+				dad404.dance();
+				gf404.dance();
+				boyfriend404.playAnim('idle');
+			}
 			dad.dance();
 			gf.dance();
-			boyfriend.playAnim('idle');
+			boyfriend.dance();
+			//boyfriend.playAnim('idle');
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
@@ -2272,6 +2332,45 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
+	
+	function HazStart(){
+		//Don't spoil the fun for others.
+		if(!Main.qtOptimisation){
+			if(FlxG.random.bool(5)){
+				var horrorR:Int = FlxG.random.int(1,6);
+				var horror:FlxSprite;
+				switch(horrorR)
+				{
+					case 2:
+						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret02', 'week2'));
+					case 3:
+						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret03', 'week2'));
+					case 4:
+						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret04', 'week2'));
+					case 5:
+						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret05', 'week2'));
+					case 6:
+						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret06', 'week2'));
+					default:
+						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret01', 'week2'));
+				}			
+				horror.scrollFactor.x = 0;
+				horror.scrollFactor.y = 0.15;
+				horror.setGraphicSize(Std.int(horror.width * 1.1));
+				horror.updateHitbox();
+				horror.screenCenter();
+				horror.antialiasing = true;
+				horror.cameras = [camHUD];
+				add(horror);
+
+				new FlxTimer().start(0.5, function(tmr:FlxTimer)
+				{
+					remove(horror);
+				});
+			}
+		}
+		
+	}
 
 	public static var songRate = 1.5;
 
@@ -2401,6 +2500,10 @@ class PlayState extends MusicBeatState
 			}
 			else
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+			}
+			else if(canSkipEndScreen){
+				loadSongHazard();
+			}
 		}
 
 		if (FlxG.keys.justPressed.SEVEN)
@@ -2481,6 +2584,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
+			if(!qtCarelessFin){
 			// Conductor.songPosition = FlxG.sound.music.time;
 			Conductor.songPosition += FlxG.elapsed * 1000;
 			/*@:privateAccess
@@ -2502,7 +2606,7 @@ class PlayState extends MusicBeatState
 					// Conductor.songPosition += FlxG.elapsed * 1000;
 					// trace('MISSED FRAME');
 				}
-			}
+			}}
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
@@ -2803,7 +2907,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (health <= 0)
+		if (health <= 0 && !noGameOver)
 		{
 			boyfriend.stunned = true;
 
@@ -3012,17 +3116,14 @@ class PlayState extends MusicBeatState
 								if(qtIsBlueScreened)
 									dad404.playAnim('singRIGHT' + altAnim, true);
 								else
-									dad.playAnim('singRIGHT' + altAnim, true);
+							case 2:
+								dad.playAnim('singUP' + altAnim, true);
+							case 3:
+								dad.playAnim('singRIGHT' + altAnim, true);
 							case 1:
-								if(qtIsBlueScreened)
-									dad404.playAnim('singDOWN' + altAnim, true);
-								else
-									dad.playAnim('singDOWN' + altAnim, true);
+								dad.playAnim('singDOWN' + altAnim, true);
 							case 0:
-								if(qtIsBlueScreened)
-									dad404.playAnim('singLEFT' + altAnim, true);
-								else
-									dad.playAnim('singLEFT' + altAnim, true);
+								dad.playAnim('singLEFT' + altAnim, true);
 						}
 						
 						if (FlxG.save.data.cpuStrums)
@@ -3129,6 +3230,13 @@ class PlayState extends MusicBeatState
 		#if debug
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
+		if (FlxG.keys.justPressed.FIVE){
+			noGameOver = !noGameOver;
+			if(noGameOver)
+				FlxG.sound.play(Paths.sound('glitch-error02'),0.65);
+			else
+				FlxG.sound.play(Paths.sound('glitch-error03'),0.65);
+		}
 		#end
 	}
 	
@@ -3543,6 +3651,10 @@ class PlayState extends MusicBeatState
 			Highscore.saveScore(SONG.song, Math.round(songScore), storyDifficulty);
 			#end
 		}
+		
+		if(SONG.song.toLowerCase() == "termination"){
+			FlxG.save.data.terminationBeaten = true; //Congratulations, you won!
+		}
 
 		if (offsetTesting)
 		{
@@ -3553,11 +3665,27 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			if (isStoryMode)
+			if (SONG.song.toLowerCase() == 'cessation') //if placed at top cuz this should execute regardless of story mode. -Haz
+			{
+				camZooming = false;
+				paused = true;
+				qtCarelessFin = true;
+				FlxG.sound.music.pause();
+				vocals.pause();
+				//Conductor.songPosition = 0;
+				var doof = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('cessation/finalDialogue')));
+				doof.scrollFactor.set();
+				doof.finishThing = endScreenHazard;
+				camHUD.visible = false;
+				schoolIntro(doof);
+			}
+			else if (isStoryMode)
 			{
 				campaignScore += Math.round(songScore);
 
 				storyPlaylist.remove(storyPlaylist[0]);
+				
+				if(!(SONG.song.toLowerCase() == 'terminate')){
 
 				if (storyPlaylist.length <= 0)
 				{
@@ -3620,6 +3748,36 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 					LoadingState.loadAndSwitchState(new PlayState());
+							});
+						}
+						else if (SONG.song.toLowerCase() == 'careless')
+						{
+							camZooming = false;
+							paused = true;
+							qtCarelessFin = true;
+							FlxG.sound.music.pause();
+							vocals.pause();
+							//Conductor.songPosition = 0;
+							var doof = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('careless/carelessDialogue2')));
+							doof.scrollFactor.set();
+							doof.finishThing = loadSongHazard;
+							camHUD.visible = false;
+							schoolIntro(doof);
+						}else
+						{
+							trace('LOADING NEXT SONG');
+							trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
+							FlxTransitionableState.skipNextTransIn = true;
+							FlxTransitionableState.skipNextTransOut = true;
+							prevCamFollow = camFollow;
+		
+							PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
+							FlxG.sound.music.stop();
+							
+		
+							LoadingState.loadAndSwitchState(new PlayState());
+						}					
+					}
 				}
 			}
 			else
@@ -3925,6 +4083,48 @@ class PlayState extends MusicBeatState
 
 		private function keyShit():Void // I've invested in emma stocks
 			{
+		//Dodge code only works on termination and Tutorial -Haz
+		if(SONG.song.toLowerCase() == "termination" || SONG.song.toLowerCase()=='tutorial'){
+			//Dodge code, yes it's bad but oh well. -Haz
+			//var dodgeButton = controls.ACCEPT; //I have no idea how to add custom controls so fuck it. -Haz
+
+			if(FlxG.keys.justPressed.SPACE)
+				trace('butttonpressed');
+
+			if(FlxG.keys.justPressed.SPACE && !bfDodging && bfCanDodge){
+				trace('DODGE START!');
+				bfDodging = true;
+				bfCanDodge = false;
+
+				if(qtIsBlueScreened)
+					boyfriend404.playAnim('dodge');
+				else
+					boyfriend.playAnim('dodge');
+
+				FlxG.sound.play(Paths.sound('dodge01'));
+
+				//Wait, then set bfDodging back to false. -Haz
+				//V1.2 - Timer lasts a bit longer (by 0.00225)
+				//new FlxTimer().start(0.22625, function(tmr:FlxTimer) 		//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
+				//new FlxTimer().start(0.15, function(tmr:FlxTimer)			//UNCOMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
+				new FlxTimer().start(bfDodgeTiming, function(tmr:FlxTimer) 	//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
+				{
+					bfDodging=false;
+					boyfriend.dance(); //V1.3 = This forces the animation to end when you are no longer safe as the animation keeps misleading people.
+					trace('DODGE END!');
+					//Cooldown timer so you can't keep spamming it.
+					//V1.3 = Incremented this by a little (0.005)
+					//new FlxTimer().start(0.1135, function(tmr:FlxTimer) 	//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
+					//new FlxTimer().start(0.1, function(tmr:FlxTimer) 		//UNCOMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
+					new FlxTimer().start(bfDodgeCooldown, function(tmr:FlxTimer) 	//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
+					{
+						bfCanDodge=true;
+						trace('DODGE RECHARGED!');
+					});
+				});
+			}
+		}
+		
 				// control arrays, order L D R U
 				var holdArray:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
 				var pressArray:Array<Bool> = [
@@ -4734,9 +4934,20 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 
 			// Dad doesnt interupt his own notes
-			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
-				dad.dance();
-		}
+			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && !qtCarelessFin){
+				/*if(SONG.song.toLowerCase() == "cessation"){
+					if((curStep >= 640 && curStep <= 794) || (curStep >= 1040 && curStep <= 1199))
+					{
+						dad.dance(true);
+					}else{
+						dad.dance();
+					}
+				}
+				else
+					dad.dance();
+			}
+
+		}*/
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
@@ -4891,12 +5102,52 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+		if (!boyfriend.animation.curAnim.name.startsWith("sing") && !bfDodging)
 		{
-			boyfriend.playAnim('idle');
+			boyfriend.dance();
+			//boyfriend.playAnim('idle');
+		}
+		//Copy and pasted code for BF to see if it would work for Dad to animate Dad during their section (previously, they just froze) -Haz
+		//Seems to have fixed a lot of problems with idle animations with Dad. Success! -A happy Haz
+		if(SONG.notes[Math.floor(curStep / 16)] != null) //Added extra check here so song doesn't crash on careless.
+		{
+			if (!(SONG.notes[Math.floor(curStep / 16)].mustHitSection) && !dad.animation.curAnim.name.startsWith("sing"))
+			{
+				if(!qtIsBlueScreened && !qtCarelessFin)
+					if(SONG.song.toLowerCase() == "cessation"){
+						if((curStep >= 640 && curStep <= 794) || (curStep >= 1040 && curStep <= 1199))
+						{
+							dad.dance(true);
+						}else{
+							dad.dance();
+						}
+					}
+					else
+						dad.dance();
+			}
+		}
+
+		//Same as above, but for 404 variants.
+		if(qtIsBlueScreened)
+		{
+			if (!boyfriend404.animation.curAnim.name.startsWith("sing") && !bfDodging)
+			{
+				boyfriend404.playAnim('idle');
+			}
+
+			//Termination KB animates every 2 curstep instead of 4 (aka, every half beat, not every beat!)
+			if(curStage!="nightmare"){ //No idea why this line causes a crash on REDACTED so erm... fuck you.
+				if(!(SONG.song.toLowerCase() == "termination")){
+					if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && !dad404.animation.curAnim.name.startsWith("sing"))
+					{
+						dad404.dance();
+					}
+				}
+			}
 		}
 		
-
+		
+		
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
