@@ -723,6 +723,7 @@ class PlayState extends MusicBeatState
 								add(waveSprite);
 								add(waveSpriteFG);
 						*/
+			}
 			case 'streetCute': 
 			{
 				defaultCamZoom = 0.92125;
