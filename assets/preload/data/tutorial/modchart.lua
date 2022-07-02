@@ -14,6 +14,8 @@ kbAttack(prepare,sound)
 
 kbAttackAlert(true/false)
 kbAttackAlertDouble(true/false)
+kbAttackAlertTriple(true/false)
+kbAttackAlertCuadruple(true/false)
 These functions are responsible for playing the alert animation + playing the sound.
 The 'true/false' is just there because for some reason without it, it just causes the game to crash? It doesn't change anything if true or false.
 
@@ -26,11 +28,12 @@ timing   = 0.22625
 cooldown = 0.1135
 
 Recommended values for double sawblades in Termination:
-timing   = 0.15
-cooldown = 0.1
+timing   = 0.15 
+cooldown = 0.1 - Here I recommend you lower the value a bit because if not, it's likely that you will die
+                 on the second sawblade since the timing is not perfectly precise, more or less 0.9 -DrkFon
 
 
-PINCER FUNCTIONS
+PINCER FUNCTIONS - JAJA NO ENTIENDO ESTO XD :( -DrkFon
 PincerIDs (Note that pincers only work on BF's side with the exception of pincer5 which is a special case used in the screenshaking section in Termination):
 1 = left arrow 	['pincer1']
 2 = down arrow	['pincer2']
@@ -114,44 +117,99 @@ function stepHit(step) -- do nothing
 		kbAlertTOGGLE(true)
 		kbAttackAlert(false) --First alert
 		kbAttack(false) 	--Prepares the sawblade
-	elseif curStep == 68 then
+	elseif curStep == 66 then
 		kbAttackAlert(false)
-	elseif curStep == 72 then
+	elseif curStep == 68 then
 		kbAttack(true)		--Dodge check!
 		
-	elseif curStep == 80 then
+	elseif curStep == 72 then
 		kbAttackAlert(false) --First alert
 		kbAttack(false) 	--Prepares the sawblade
-	elseif curStep == 84 then
+	elseif curStep == 74 then
 		kbAttackAlert(false)
-	elseif curStep == 88 then
+	elseif curStep == 76 then
 		kbAttack(true)		--Dodge check!
 		
 	--Example double sawblade!
+	elseif curStep == 88 then
+		kbAttackAlert(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 90 then
+		kbAttackAlertDouble(false)
+	elseif curStep == 92 then
+		kbAttack(true, "old/attack_alt01")		--Dodge check!
+	elseif curStep == 93 then
+		kbAttack(false) 	--Prepares the sawblade again
+	elseif curStep == 94 then
+		kbAttack(true, "old/attack_alt02")		--Dodge check!
+	
+	--Triple sawblade!
 	elseif curStep == 128 then
-		kbAttackAlert(false) --First alert
+		kbAttackAlertDouble(false) --First alert --Now it's the alert double cuz that way it indicates that 3 or 4 sawblades are coming lol
 		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 130 then
+		kbAttackAlertDouble(false) --Second alert (Also Double)
 	elseif curStep == 132 then
-		kbAttackAlertDouble(false)
+		kbAttackAlertTriple(false) --Third alert
+	elseif curStep == 134 then
+		kbAttackAlertTriple(false) --Fourth alert lol
 	elseif curStep == 136 then
-		kbAttack(true, "old/attack_alt01")		--Dodge check!
+		kbAttack(true, "old/attack_alt02") --Dodge check!
+	elseif curStep == 137 then
+		kbAttack(false) 	   --Prepares the sawblade again
+	elseif curStep == 138 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!.
 	elseif curStep == 139 then
-		kbAttack(false) 	--Prepares the sawblade again
+		kbAttack(false) 	   --Prepares the sawblade again lol
 	elseif curStep == 140 then
-		kbAttack(true, "old/attack_alt02")		--Dodge check!
-	
+		kbAttack(true, "old/attack_alt03") --Dodge check!
+
+	--Triple sawblade again
 	elseif curStep == 144 then
-		kbAttackAlert(false) --First alert
+		kbAttackAlertDouble(false) --First alert
 		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 146 then
+		kbAttackAlertDouble(false) --Second alert (Also Double)
 	elseif curStep == 148 then
-		kbAttackAlertDouble(false)
+		kbAttackAlertTriple(false) --Third alert
+	elseif curStep == 150 then
+		kbAttackAlertTriple(false) --Fourth alert lol
 	elseif curStep == 152 then
-		kbAttack(true, "old/attack_alt01")		--Dodge check!
+		kbAttack(true, "old/attack_alt02") --Dodge check!
+	elseif curStep == 153 then
+		kbAttack(false) 	   --Prepares the sawblade again
+	elseif curStep == 154 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!.
 	elseif curStep == 155 then
-		kbAttack(false) 	--Prepares the sawblade again
+		kbAttack(false) 	   --Prepares the sawblade again lol
 	elseif curStep == 156 then
-		kbAttack(true, "old/attack_alt02")		--Dodge check!
+		kbAttack(true, "old/attack_alt03") --Dodge check!
 	
+	--Cuadruple sawblade!! LMAO
+	elseif curStep == 192 then
+		kbAttackAlertDouble(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 194 then
+		kbAttackAlertDouble(false) --Second alert
+	elseif curStep == 196 then
+		kbAttackAlertTriple(false) --Third alert
+	elseif curStep == 198 then
+		kbAttackAlertCuadruple(false) --Fourth alert for 4 sawblades HOLY SHIT...
+	elseif curStep == 200 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!
+	elseif curStep == 201 then
+		kbAttack(false) 	   --Prepares the sawblade again
+	elseif curStep == 202 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!.
+	elseif curStep == 203 then
+		kbAttack(false) 	   --Prepares the sawblade again lol
+	elseif curStep == 204 then
+		kbAttack(true, "old/attack_alt03") --Dodge check!
+	elseif curStep == 205 then
+		kbAttack(false) 	   --Prepares the sawblade again --YOOOOO THOSE ARE SO MUCH SAWBLADES
+	elseif curStep == 206 then
+		kbAttack(true, "old/attack_alt04") --Dodge check!
+
 	elseif curStep == 192 then
 		kbPincerPrepare(2,false) 	--plays the enter animation for the pincer and adds it to the game scene
 	elseif curStep == 196 then
@@ -166,28 +224,61 @@ function stepHit(step) -- do nothing
 		end
 	elseif curStep == 204 then
 		kbPincerPrepare(2,true)		--Plays the leaving animation for the pincer and removes it from the scene once the animation is finished
+
+	--Cuadruple sawblade again! AAAAAAAAAAAAAAAAAAAA
+	elseif curStep == 208 then
+		kbAttackAlertDouble(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 210 then
+		kbAttackAlertDouble(false) --Second alert
+	elseif curStep == 212 then
+		kbAttackAlertTriple(false) --Third alert
+	elseif curStep == 214 then
+		kbAttackAlertCuadruple(false) --Fourth alert for 4 sawblades HOLY SHIT...
+	elseif curStep == 216 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!
+	elseif curStep == 217 then
+		kbAttack(false) 	   --Prepares the sawblade again
+	elseif curStep == 218 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!.
+	elseif curStep == 219 then
+		kbAttack(false) 	   --Prepares the sawblade again lol
+	elseif curStep == 220 then
+		kbAttack(true, "old/attack_alt03") --Dodge check!
+	elseif curStep == 221 then
+		kbAttack(false) 	   --Prepares the sawblade again --YOOOOO THOSE ARE SO MUCH SAWBLADES
+	elseif curStep == 222 then
+		kbAttack(true, "old/attack_alt04") --Dodge check!
 		
 	elseif curStep == 256 then
 		tweenPos(5, x5, y5, 0.275, done) --Resets the moved note back to normal position
 		
-	elseif curStep == 288 then
+	elseif curStep == 264 then
 		kbAttackAlert(false) --First alert
 		kbAttack(false) 	--Prepares the sawblade
-	elseif curStep == 292 then
+	elseif curStep == 266 then
 		kbAttackAlert(false)
-	elseif curStep == 296 then
+	elseif curStep == 268 then
 		kbAttack(true)		--Dodge check!
-		
-	elseif curStep == 304 then
+
+	elseif curStep == 280 then
 		kbAttackAlert(false) --First alert
 		kbAttack(false) 	--Prepares the sawblade
-	elseif curStep == 308 then
-		kbAttackAlertDouble(false)
+	elseif curStep == 282 then
+		kbAttackAlert(false)
+	elseif curStep == 284 then
+		kbAttack(true)		--Dodge check!
+
 	elseif curStep == 312 then
-		kbAttack(true, "old/attack_alt01")		--Dodge check!
-	elseif curStep == 315 then
-		kbAttack(false) 	--Prepares the sawblade again
+		kbAttackAlert(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 314 then
+		kbAttackAlertDouble(false)
 	elseif curStep == 316 then
+		kbAttack(true, "old/attack_alt01")		--Dodge check!
+	elseif curStep == 317 then
+		kbAttack(false) 	--Prepares the sawblade again
+	elseif curStep == 318 then
 		kbAttack(true, "old/attack_alt02")		--Dodge check!
 		
 	elseif curStep == 320 then
@@ -200,16 +291,70 @@ function stepHit(step) -- do nothing
 	elseif curStep == 336 then
 		kbPincerPrepare(4,true)
 
-	elseif curStep == 376 then
+	elseif curStep == 352 then
 		kbAttackAlert(false) --First alert
 		kbAttack(false) 	--Prepares the sawblade
-	elseif curStep == 380 then
+	elseif curStep == 354 then
 		kbAttackAlert(false)
-	elseif curStep == 384 then
+	elseif curStep == 356 then
 		kbAttack(true)		--Dodge check!
+
+	elseif curStep == 360 then
+		kbAttackAlert(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 362 then
+		kbAttackAlert(false)
+	elseif curStep == 364 then
+		kbAttack(true)		--Dodge check!
+	
+	--Triple sawblade again
+	elseif curStep == 372 then
+		kbAttackAlertDouble(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 374 then
+		kbAttackAlertDouble(false) --Second alert (Also Double)
+	elseif curStep == 376 then
+		kbAttackAlertTriple(false) --Third alert
+	elseif curStep == 378 then
+		kbAttackAlertTriple(false) --Fourth alert lol
+	elseif curStep == 380 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!
+	elseif curStep == 381 then
+		kbAttack(false) 	   --Prepares the sawblade again
+	elseif curStep == 382 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!.
+	elseif curStep == 383 then
+		kbAttack(false) 	   --Prepares the sawblade again lol
+	elseif curStep == 384 then
+		kbAttack(true, "old/attack_alt03") --Dodge check!
 		
 	elseif curStep == 400 then
 		tweenPos(7, x7, y7, 1, done)
+
+	--Final Cuadruple sawblade Bruh
+	elseif curStep == 448 then
+		kbAttackAlertDouble(false) --First alert
+		kbAttack(false) 	--Prepares the sawblade
+	elseif curStep == 450 then
+		kbAttackAlertDouble(false) --Second alert
+	elseif curStep == 452 then
+		kbAttackAlertTriple(false) --Third alert
+	elseif curStep == 454 then
+		kbAttackAlertCuadruple(false) --Fourth alert for 4 sawblades HOLY SHIT...
+	elseif curStep == 456 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!
+	elseif curStep == 457 then
+		kbAttack(false) 	   --Prepares the sawblade again
+	elseif curStep == 458 then
+		kbAttack(true, "old/attack_alt02") --Dodge check!.
+	elseif curStep == 459 then
+		kbAttack(false) 	   --Prepares the sawblade again lol
+	elseif curStep == 460 then
+		kbAttack(true, "old/attack_alt03") --Dodge check!
+	elseif curStep == 461 then
+		kbAttack(false) 	   --Prepares the sawblade again --YOOOOO THOSE ARE SO MUCH SAWBLADES
+	elseif curStep == 462 then
+		kbAttack(true, "old/attack_alt04") --Dodge check!
 	end
 	
 	
