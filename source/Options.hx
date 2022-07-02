@@ -545,6 +545,28 @@ class CustomizeGameplay extends Option
 	}
 }
 
+class QTOptimiseOption extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		Main.qtOptimisation = !Main.qtOptimisation;
+		FlxG.save.data.qtOptimisation = Main.qtOptimisation;
+		display = updateDisplay();
+		return true;
+	}
+
+	private override function updateDisplay():String
+	{
+		return "QT Optimisation " + (Main.qtOptimisation ? "on" : "off");
+	}
+}
+
 class WatermarkOption extends Option
 {
 	public function new(desc:String)
