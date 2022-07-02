@@ -119,6 +119,7 @@ class TitleState extends MusicBeatState
 
 	var logoBl:FlxSprite;
 	var gfDance:FlxSprite;
+	var qt:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxSprite;
 
@@ -146,7 +147,7 @@ class TitleState extends MusicBeatState
 			// music.loadStream(Paths.music('freakyMenu'));
 			// FlxG.sound.list.add(music);
 			// music.play();
-			FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+			FlxG.sound.playMusic(Paths.music('qtMenu'), 0);
 
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
@@ -176,6 +177,15 @@ class TitleState extends MusicBeatState
 		gfDance.antialiasing = true;
 		add(gfDance);
 		add(logoBl);
+
+		//hi QT
+		qt = new FlxSprite(FlxG.width * -0.4, FlxG.height * 0.035);
+		qt.frames = Paths.getSparrowAtlas('qt_titlescreen');
+		qt.animation.addByPrefix('idle', 'titleanimation', 24, false);
+		qt.setGraphicSize(Std.int(qt.width * 0.25));
+		qt.antialiasing = true;
+		qt.y-=200;
+		add(qt);
 
 		titleText = new FlxSprite(100, FlxG.height * 0.8);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
