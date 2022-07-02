@@ -1800,15 +1800,9 @@ class PlayState extends MusicBeatState
 
 		startTimer = new FlxTimer().start(Conductor.crochet / 1000, function(tmr:FlxTimer)
 		{
-			if(!Main.qtOptimisation && (SONG.song.toLowerCase()=='censory-overload' || SONG.song.toLowerCase() == 'termination')){
-				dad404.dance();
-				gf404.dance();
-				boyfriend404.playAnim('idle');
-			}
 			dad.dance();
 			gf.dance();
-			boyfriend.dance();
-			//boyfriend.playAnim('idle');
+			boyfriend.playAnim('idle');
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
@@ -2333,45 +2327,6 @@ class PlayState extends MusicBeatState
 	var canPause:Bool = true;
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
-	
-	function HazStart(){
-		//Don't spoil the fun for others.
-		if(!Main.qtOptimisation){
-			if(FlxG.random.bool(5)){
-				var horrorR:Int = FlxG.random.int(1,6);
-				var horror:FlxSprite;
-				switch(horrorR)
-				{
-					case 2:
-						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret02', 'week2'));
-					case 3:
-						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret03', 'week2'));
-					case 4:
-						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret04', 'week2'));
-					case 5:
-						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret05', 'week2'));
-					case 6:
-						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret06', 'week2'));
-					default:
-						horror = new FlxSprite(-80).loadGraphic(Paths.image('topsecretfolder/DoNotLook/horrorSecret01', 'week2'));
-				}			
-				horror.scrollFactor.x = 0;
-				horror.scrollFactor.y = 0.15;
-				horror.setGraphicSize(Std.int(horror.width * 1.1));
-				horror.updateHitbox();
-				horror.screenCenter();
-				horror.antialiasing = true;
-				horror.cameras = [camHUD];
-				add(horror);
-
-				new FlxTimer().start(0.5, function(tmr:FlxTimer)
-				{
-					remove(horror);
-				});
-			}
-		}
-		
-	}
 
 	public static var songRate = 1.5;
 
@@ -2501,13 +2456,8 @@ class PlayState extends MusicBeatState
 			}
 			else
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-			}
-			else if(canSkipEndScreen){
-				loadSongHazard();
-			}
 		}
 
-		}
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			#if windows
@@ -2586,7 +2536,6 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			if(!qtCarelessFin){
 			// Conductor.songPosition = FlxG.sound.music.time;
 			Conductor.songPosition += FlxG.elapsed * 1000;
 			/*@:privateAccess
@@ -2608,7 +2557,7 @@ class PlayState extends MusicBeatState
 					// Conductor.songPosition += FlxG.elapsed * 1000;
 					// trace('MISSED FRAME');
 				}
-			}}
+			}
 
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
@@ -2909,7 +2858,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (health <= 0 && !noGameOver)
+		if (health <= 0)
 		{
 			boyfriend.stunned = true;
 
@@ -3118,14 +3067,17 @@ class PlayState extends MusicBeatState
 								if(qtIsBlueScreened)
 									dad404.playAnim('singRIGHT' + altAnim, true);
 								else
-							case 2:
-								dad.playAnim('singUP' + altAnim, true);
-							case 3:
-								dad.playAnim('singRIGHT' + altAnim, true);
+									dad.playAnim('singRIGHT' + altAnim, true);
 							case 1:
-								dad.playAnim('singDOWN' + altAnim, true);
+								if(qtIsBlueScreened)
+									dad404.playAnim('singDOWN' + altAnim, true);
+								else
+									dad.playAnim('singDOWN' + altAnim, true);
 							case 0:
-								dad.playAnim('singLEFT' + altAnim, true);
+								if(qtIsBlueScreened)
+									dad404.playAnim('singLEFT' + altAnim, true);
+								else
+									dad.playAnim('singLEFT' + altAnim, true);
 						}
 						
 						if (FlxG.save.data.cpuStrums)
@@ -3232,13 +3184,6 @@ class PlayState extends MusicBeatState
 		#if debug
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
-		if (FlxG.keys.justPressed.FIVE){
-			noGameOver = !noGameOver;
-			if(noGameOver)
-				FlxG.sound.play(Paths.sound('glitch-error02'),0.65);
-			else
-				FlxG.sound.play(Paths.sound('glitch-error03'),0.65);
-		}
 		#end
 	}
 	
@@ -3653,10 +3598,6 @@ class PlayState extends MusicBeatState
 			Highscore.saveScore(SONG.song, Math.round(songScore), storyDifficulty);
 			#end
 		}
-		
-		if(SONG.song.toLowerCase() == "termination"){
-			FlxG.save.data.terminationBeaten = true; //Congratulations, you won!
-		}
 
 		if (offsetTesting)
 		{
@@ -3667,27 +3608,11 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			if (SONG.song.toLowerCase() == 'cessation') //if placed at top cuz this should execute regardless of story mode. -Haz
-			{
-				camZooming = false;
-				paused = true;
-				qtCarelessFin = true;
-				FlxG.sound.music.pause();
-				vocals.pause();
-				//Conductor.songPosition = 0;
-				var doof = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('cessation/finalDialogue')));
-				doof.scrollFactor.set();
-				doof.finishThing = endScreenHazard;
-				camHUD.visible = false;
-				schoolIntro(doof);
-			}
-			else if (isStoryMode)
+			if (isStoryMode)
 			{
 				campaignScore += Math.round(songScore);
 
 				storyPlaylist.remove(storyPlaylist[0]);
-				
-				if(!(SONG.song.toLowerCase() == 'terminate')){
 
 				if (storyPlaylist.length <= 0)
 				{
@@ -3750,36 +3675,6 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.stop();
 
 					LoadingState.loadAndSwitchState(new PlayState());
-							});
-						}
-						else if (SONG.song.toLowerCase() == 'careless')
-						{
-							camZooming = false;
-							paused = true;
-							qtCarelessFin = true;
-							FlxG.sound.music.pause();
-							vocals.pause();
-							//Conductor.songPosition = 0;
-							var doof = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('careless/carelessDialogue2')));
-							doof.scrollFactor.set();
-							doof.finishThing = loadSongHazard;
-							camHUD.visible = false;
-							schoolIntro(doof);
-						}else
-						{
-							trace('LOADING NEXT SONG');
-							trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
-							FlxTransitionableState.skipNextTransIn = true;
-							FlxTransitionableState.skipNextTransOut = true;
-							prevCamFollow = camFollow;
-		
-							PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
-							FlxG.sound.music.stop();
-							
-		
-							LoadingState.loadAndSwitchState(new PlayState());
-						}					
-					}
 				}
 			}
 			else
@@ -4085,48 +3980,6 @@ class PlayState extends MusicBeatState
 
 		private function keyShit():Void // I've invested in emma stocks
 			{
-		//Dodge code only works on termination and Tutorial -Haz
-		if(SONG.song.toLowerCase() == "termination" || SONG.song.toLowerCase()=='tutorial'){
-			//Dodge code, yes it's bad but oh well. -Haz
-			//var dodgeButton = controls.ACCEPT; //I have no idea how to add custom controls so fuck it. -Haz
-
-			if(FlxG.keys.justPressed.SPACE)
-				trace('butttonpressed');
-
-			if(FlxG.keys.justPressed.SPACE && !bfDodging && bfCanDodge){
-				trace('DODGE START!');
-				bfDodging = true;
-				bfCanDodge = false;
-
-				if(qtIsBlueScreened)
-					boyfriend404.playAnim('dodge');
-				else
-					boyfriend.playAnim('dodge');
-
-				FlxG.sound.play(Paths.sound('dodge01'));
-
-				//Wait, then set bfDodging back to false. -Haz
-				//V1.2 - Timer lasts a bit longer (by 0.00225)
-				//new FlxTimer().start(0.22625, function(tmr:FlxTimer) 		//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
-				//new FlxTimer().start(0.15, function(tmr:FlxTimer)			//UNCOMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
-				new FlxTimer().start(bfDodgeTiming, function(tmr:FlxTimer) 	//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
-				{
-					bfDodging=false;
-					boyfriend.dance(); //V1.3 = This forces the animation to end when you are no longer safe as the animation keeps misleading people.
-					trace('DODGE END!');
-					//Cooldown timer so you can't keep spamming it.
-					//V1.3 = Incremented this by a little (0.005)
-					//new FlxTimer().start(0.1135, function(tmr:FlxTimer) 	//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
-					//new FlxTimer().start(0.1, function(tmr:FlxTimer) 		//UNCOMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
-					new FlxTimer().start(bfDodgeCooldown, function(tmr:FlxTimer) 	//COMMENT THIS IF YOU WANT TO USE DOUBLE SAW VARIATIONS!
-					{
-						bfCanDodge=true;
-						trace('DODGE RECHARGED!');
-					});
-				});
-			}
-		}
-		
 				// control arrays, order L D R U
 				var holdArray:Array<Bool> = [controls.LEFT, controls.DOWN, controls.UP, controls.RIGHT];
 				var pressArray:Array<Bool> = [
@@ -4936,20 +4789,9 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 
 			// Dad doesnt interupt his own notes
-			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && !qtCarelessFin){
-				/*if(SONG.song.toLowerCase() == "cessation"){
-					if((curStep >= 640 && curStep <= 794) || (curStep >= 1040 && curStep <= 1199))
-					{
-						dad.dance(true);
-					}else{
-						dad.dance();
-					}
-				}
-				else
-					dad.dance();
-			}
-
-		}*/
+			if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && dad.curCharacter != 'gf')
+				dad.dance();
+		}
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 
@@ -5104,52 +4946,12 @@ class PlayState extends MusicBeatState
 			gf.dance();
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing") && !bfDodging)
+		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
-			boyfriend.dance();
-			//boyfriend.playAnim('idle');
+			boyfriend.playAnim('idle');
 		}
-		//Copy and pasted code for BF to see if it would work for Dad to animate Dad during their section (previously, they just froze) -Haz
-		//Seems to have fixed a lot of problems with idle animations with Dad. Success! -A happy Haz
-		if(SONG.notes[Math.floor(curStep / 16)] != null) //Added extra check here so song doesn't crash on careless.
-		{
-			if (!(SONG.notes[Math.floor(curStep / 16)].mustHitSection) && !dad.animation.curAnim.name.startsWith("sing"))
-			{
-				if(!qtIsBlueScreened && !qtCarelessFin)
-					if(SONG.song.toLowerCase() == "cessation"){
-						if((curStep >= 640 && curStep <= 794) || (curStep >= 1040 && curStep <= 1199))
-						{
-							dad.dance(true);
-						}else{
-							dad.dance();
-						}
-					}
-					else
-						dad.dance();
-			}
-		}
+		
 
-		//Same as above, but for 404 variants.
-		if(qtIsBlueScreened)
-		{
-			if (!boyfriend404.animation.curAnim.name.startsWith("sing") && !bfDodging)
-			{
-				boyfriend404.playAnim('idle');
-			}
-
-			//Termination KB animates every 2 curstep instead of 4 (aka, every half beat, not every beat!)
-			if(curStage!="nightmare"){ //No idea why this line causes a crash on REDACTED so erm... fuck you.
-				if(!(SONG.song.toLowerCase() == "termination")){
-					if (SONG.notes[Math.floor(curStep / 16)].mustHitSection && !dad404.animation.curAnim.name.startsWith("sing"))
-					{
-						dad404.dance();
-					}
-				}
-			}
-		}
-		
-		
-		
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
