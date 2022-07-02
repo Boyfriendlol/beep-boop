@@ -1800,7 +1800,6 @@ class PlayState extends MusicBeatState
 
 	var luaWiggles:Array<WiggleEffect> = [];
 
-  }
 	public static var luaModchart:ModchartState = null;
 
 	function startCountdown():Void
@@ -2364,7 +2363,7 @@ class PlayState extends MusicBeatState
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
 	
-	/*function HazStart(){
+	function HazStart(){
 		//Don't spoil the fun for others.
 		if(!Main.qtOptimisation){
 			if(FlxG.random.bool(5)){
@@ -2401,7 +2400,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-	}*/
+	}
 
 	public static var songRate = 1.5;
 
@@ -2532,10 +2531,10 @@ class PlayState extends MusicBeatState
 			else
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			}
-			else if(canSkipEndScreen){
+			/*else if(canSkipEndScreen){
 				loadSongHazard();
 			}
-		}
+		}*/
 
 		if (FlxG.keys.justPressed.SEVEN)
 		{
@@ -2615,7 +2614,7 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			if(!qtCarelessFin){
+			//if(!qtCarelessFin){
 			// Conductor.songPosition = FlxG.sound.music.time;
 			Conductor.songPosition += FlxG.elapsed * 1000;
 			/*@:privateAccess
