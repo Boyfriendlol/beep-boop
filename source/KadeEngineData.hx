@@ -87,6 +87,8 @@ class KadeEngineData
 
 		Main.watermarks = FlxG.save.data.watermark;
 
+		Main.qtOptimisation = FlxG.save.data.qtOptimisation;
+
 		(cast (Lib.current.getChildAt(0), Main)).setFPSCap(FlxG.save.data.fpsCap);
 	}
 }
