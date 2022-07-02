@@ -220,13 +220,13 @@ class ModchartState
                 @:privateAccess
 				return PlayState.dad;
 			case 'pincer1': //Termination shit
-				return pincer1;
+				return PlayState.pincer1;
 			case 'pincer2': 
-				return pincer2;
+				return PlayState.pincer2;
 			case 'pincer3': 
-				return pincer3;
+				return PlayState.pincer3;
 			case 'pincer4':
-				return pincer4;
+				return PlayState.pincer4;
 		}
 		// lua objects or what ever
 		if (luaSprites.get(id) == null)
@@ -439,31 +439,31 @@ class ModchartState
 
 				//Termination shit -Haz
 				trace(Lua_helper.add_callback(lua,"kbAlertTOGGLE", function(toAdd:Bool) {
-					KBALERT_TOGGLE(toAdd);
+					PlayState.KBALERT_TOGGLE(toAdd);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttackTOGGLE", function(toAdd:Bool) {
-					KBATTACK_TOGGLE(toAdd);
+					PlayState.KBATTACK_TOGGLE(toAdd);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbPincerPrepare", function(laneID:Int, goAway:Bool) {
-					KBPINCER_PREPARE(laneID,goAway);
+					PlayState.KBPINCER_PREPARE(laneID,goAway);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbPincerGrab", function(laneID:Int) {
-					KBPINCER_GRAB(laneID);
+					PlayState.KBPINCER_GRAB(laneID);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttackAlert", function(pointless:Bool = false) {
-					KBATTACK_ALERT(pointless);
+					PlayState.KBATTACK_ALERT(pointless);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttackAlertDouble", function(pointless:Bool = false) {
-					KBATTACK_ALERTDOUBLE(pointless);
+					PlayState.KBATTACK_ALERTDOUBLE(pointless);
 				}));
 				trace(Lua_helper.add_callback(lua,"kbAttack", function(prepare:Bool = false, sound:String = 'attack') {
-					KBATTACK(prepare, sound);
+					PlayState.KBATTACK(prepare, sound);
 				}));
 				trace(Lua_helper.add_callback(lua,"dodgeTimingOverride", function(newValue:Float = 0.22625) {
-					dodgeTimingOverride(newValue);
+					PlayState.hxdodgeTimingOverride(newValue);
 				}));
 				trace(Lua_helper.add_callback(lua,"dodgeCooldownOverride", function(newValue:Float = 0.1135) {
-					dodgeCooldownOverride(newValue);
+					PlayState.dodgeCooldownOverride(newValue);
 				}));
 				
 	
