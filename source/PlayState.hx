@@ -1800,6 +1800,7 @@ class PlayState extends MusicBeatState
 
 	var luaWiggles:Array<WiggleEffect> = [];
 
+  }
 	public static var luaModchart:ModchartState = null;
 
 	function startCountdown():Void
