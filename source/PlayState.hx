@@ -203,10 +203,10 @@ class PlayState extends MusicBeatState
 	var bfDodgeCooldown:Float = 0.1135;
 	var kb_attack_saw:FlxSprite;
 	var kb_attack_alert:FlxSprite;
-	var pincer1:FlxSprite;
-	var pincer2:FlxSprite;
-	var pincer3:FlxSprite;
-	var pincer4:FlxSprite;
+	public static var pincer1:FlxSprite;
+	public static var pincer2:FlxSprite;
+	public static var pincer3:FlxSprite;
+	public static var pincer4:FlxSprite;
 	public static var deathBySawBlade:Bool = false;
 	var canSkipEndScreen:Bool = false; //This is set to true at the "thanks for playing" screen. Once true, in update, if enter is pressed it'll skip to the main menu.
 
