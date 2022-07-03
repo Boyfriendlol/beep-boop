@@ -80,7 +80,7 @@ local x4,x5,x6,x7,y4,y5,y6,y7
 function start(song)
 	-- Initialization
 	dodgeTimingOverride(0.3)
-	dodgeCooldownOverride(0.175)
+	dodgeCooldownOverride(0)
 		
 		
 	x4 = getActorX(4)
