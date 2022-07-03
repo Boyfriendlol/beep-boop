@@ -200,7 +200,7 @@ class PlayState extends MusicBeatState
 	var bfDodging:Bool = false;
 	var bfCanDodge:Bool = false;
 	var bfDodgeTiming:Float = 0.22625;
-	var bfDodgeCooldown:Float = 0.1135;
+	var bfDodgeCooldown:Float = 0;
 	var kb_attack_saw:FlxSprite;
 	var kb_attack_alert:FlxSprite;
 	public static var pincer1:FlxSprite;
