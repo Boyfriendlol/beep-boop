@@ -1781,6 +1781,10 @@ class PlayState extends MusicBeatState
 
 	        #if android
 	        androidc.visible = true;
+		if (SONG.song.toLowerCase() == 'tutorial' || SONG.song.toLowerCase() == 'termination')
+		{
+		_pad.visible = true;
+		}
 	        #end
 
 		generateStaticArrows(0);
@@ -3614,6 +3618,10 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 	        #if android
 	        androidc.visible = false;
+		if (SONG.song.toLowerCase() == 'tutorial' || SONG.song.toLowerCase() == 'termination')
+		{
+		_pad.visible = false;
+		}
 	        #end
 		if (SONG.validScore)
 		{
@@ -4008,10 +4016,10 @@ class PlayState extends MusicBeatState
 			//Dodge code, yes it's bad but oh well. -Haz
 			//var dodgeButton = controls.ACCEPT; //I have no idea how to add custom controls so fuck it. -Haz
 
-			if(FlxG.keys.justPressed.SPACE)
+			if(FlxG.keys.justPressed.SPACE #if android || _pad.buttonA.justPressed #end)
 				trace('butttonpressed');
 
-			if(FlxG.keys.justPressed.SPACE && !bfDodging && bfCanDodge){
+			if(FlxG.keys.justPressed.SPACE #if android || _pad.buttonA.justPressed #end && !bfDodging && bfCanDodge){
 				trace('DODGE START!');
 				bfDodging = true;
 				bfCanDodge = false;
