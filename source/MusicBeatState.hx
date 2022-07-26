@@ -77,7 +77,7 @@ class MusicBeatState extends FlxUIState
 	}
 	#end
 
-	if (PlayState.SONG.song.toLowerCase() == 'tutorial' || PlayState.SONG.song.toLowerCase() == 'termination') {
+	if (PlayState.SONG.song.toLowerCase() == "tutorial" || PlayState.SONG.song.toLowerCase() == 'termination') {
 	_pad = new FlxVirtualPad(NONE, A);
 	_pad.alpha = 0.75;
 	_pad.visible = false;
