@@ -80,7 +80,7 @@ class MusicBeatState extends FlxUIState
 	        _pad = new FlxVirtualPad(NONE, A);
 	        _pad.alpha = 0.75;
 	        _pad.visible = false;
-	        _pad.cameras = [camControls];
+	        _pad.cameras = [camcontrol];
 	        add(_pad);
                 }
 	}
