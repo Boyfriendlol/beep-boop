@@ -79,7 +79,7 @@ local x4,x5,x6,x7,y4,y5,y6,y7
 
 function start(song)
 	-- Initialization
-	dodgeTimingOverride(0.3)
+	dodgeTimingOverride(0.2)
 	dodgeCooldownOverride(0)
 		
 		
