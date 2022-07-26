@@ -74,16 +74,17 @@ class MusicBeatState extends FlxUIState
 		androidc.visible = false;
 
 		add(androidc);
+
+	        if (PlayState.SONG.song.toLowerCase() == "tutorial" || PlayState.SONG.song.toLowerCase() == 'termination')
+                {
+	        _pad = new FlxVirtualPad(NONE, A);
+	        _pad.alpha = 0.75;
+	        _pad.visible = false;
+	        _pad.cameras = [camControls];
+	        add(_pad);
+                }
 	}
 	#end
-
-	if (PlayState.SONG.song.toLowerCase() == "tutorial" || PlayState.SONG.song.toLowerCase() == 'termination') {
-	_pad = new FlxVirtualPad(NONE, A);
-	_pad.alpha = 0.75;
-	_pad.visible = false;
-	_pad.cameras = [camControls];
-	add(_pad);
-        }
 
 	#if android
         public function addPadCamera() {
